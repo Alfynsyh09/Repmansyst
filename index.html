@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Web Report Input</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f2f4f7; }
+    form { background: white; padding: 20px; border-radius: 10px; max-width: 800px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 20px; padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h2>Form Input Web Report</h2>
+  <form id="reportForm">
+    <label>Tanggal</label>
+    <input type="date" name="tanggal" required>
+
+    <label>Hand Over Time</label>
+    <input type="time" name="handovertimelayer1">
+
+    <label>Petugas Layer 1 (Open)</label>
+    <input type="text" name="petugaslayer1(open)">
+
+    <label>Failure Time</label>
+    <input type="time" name="failureTime">
+
+    <label>Recovery Time</label>
+    <input type="time" name="recoveryTime">
+
+    <label>Duration (jam)</label>
+    <input type="number" name="duration" step="0.01">
+
+    <label>Update To Layer 1</label>
+    <input type="time" name="updateToLayer1">
+
+    <label>Petugas Layer 1 (Closing)</label>
+    <input type="text" name="petugaslayer1(Closing)">
+
+    <label>Software</label>
+    <select name="software">
+      <option>SIPP</option>
+      <option>CIS</option>
+      <option>TypeB Garuda</option>
+      <option>TPS Online</option>
+      <option>Bea Cukai</option>
+      <option>Gapura</option>
+      <option>Lainnya</option>
+    </select>
+
+    <label>Report Analysis</label>
+    <textarea name="reportAnalysislayer1" rows="3"></textarea>
+
+    <label>Mitigation Layer 2 Support</label>
+    <textarea name="mitigationlayer2support" rows="3"></textarea>
+
+    <label>Resolution</label>
+    <textarea name="resolution" rows="3"></textarea>
+
+    <label>Layer 3 Officer</label>
+    <select name="layer3Officer">
+      <option>NONE</option>
+      <option>Wahyudi</option>
+      <option>Ismanto</option>
+      <option>Afrain</option>
+      <option>Leo</option>
+      <option>Dede</option>
+    </select>
+
+    <label>Resolution Layer 3</label>
+    <input type="text" name="resolutionLayer3">
+
+    <label>Case Status</label>
+    <select name="caseStatus">
+      <option>Progress</option>
+      <option>Solved</option>
+      <option>Pending</option>
+    </select>
+
+    <label>Petugas Layer 2</label>
+    <select name="petugasLayer2">
+      <option>Ahmad</option>
+      <option>Ismanto</option>
+      <option>Dedi</option>
+      <option>Hannafi</option>
+      <option>Afrain</option>
+    </select>
+
+    <label>Category</label>
+    <select name="category">
+      <option>System</option>
+      <option>Security</option>
+      <option>Server</option>
+      <option>Other</option>
+    </select>
+
+    <button type="submit">Kirim ke Spreadsheet</button>
+  </form>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwfblUD0f_cnogPMV5VwrP0MJkSvyO8oUBhjEXJUWPU51eSgVX0Zv3A31C1t1maT3eLUQ/exec"; // Ganti dengan URL dari Google Apps Script
+
+    document.getElementById("reportForm").addEventListener("submit", e => {
+      e.preventDefault();
+
+      
+      const form = e.target;
+      fetch (scriptURL, {method: "POST", body: new FormData(form) })
+        .then (Response => {
+            alert("✅ Data berhasil dikirim ke Google Sheet!");
+            form.reset();
+        })
+        .catch(error => {
+            alert("❌ Gagal mengirim data: " + error.message);
+        })
+
+  </script>
+</body>
+</html>
